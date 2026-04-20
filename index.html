@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PostRoe — Our Bodies, Their Lies, The Truths We Use to Win</title>
+    <meta name="description" content="A living dashboard tracking the post-Dobbs landscape in the United States. Inspired by Jessica Valenti's Abortion." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23F3E7D8'/%3E%3Ctext x='16' y='23' text-anchor='middle' font-family='Georgia' font-size='22' font-style='italic' fill='%23D85A3C'%3EP%3C/text%3E%3C/svg%3E" />
+  </head>
+  <body>
+    <!-- ================= HEADER ================= -->
+    <header class="site-header">
+      <div class="container site-header__inner">
+        <a href="index.html" class="brand" aria-label="PostRoe home">
+          <svg viewBox="0 0 32 32" fill="none" aria-hidden="true">
+            <rect x="1" y="1" width="30" height="30" rx="6" stroke="currentColor" stroke-width="1.5" />
+            <path d="M10 22 L10 10 L16 10 Q22 10 22 14.5 Q22 19 16 19 L10 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none" />
+            <circle cx="22" cy="22" r="2" fill="currentColor" />
+          </svg>
+          <span><strong>post</strong><em>roe</em>.org</span>
+        </a>
+        <nav class="nav" aria-label="Primary">
+          <a href="index.html" aria-current="page">Dashboard</a>
+          <a href="works.html">Books</a>
+          <button class="theme-toggle" data-theme-toggle aria-label="Toggle theme"></button>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <!-- ================= HERO ================= -->
+      <section class="hero">
+        <div class="container">
+          <div class="reveal">
+            <span class="hero__eyebrow">Post-Dobbs · United States · Live Tracker</span>
+            <h1 class="hero__title">
+              A living <span class="their">record</span> of what <span class="our">Dobbs</span> did &mdash;<br />
+              and the <span class="truth">truths</span> <span class="we">we</span> use to win.
+            </h1>
+          </div>
+
+          <div class="hero__body reveal">
+            <p class="hero__lede">
+              On June 24, 2022, the Supreme Court overturned <b>Roe v. Wade</b>. Every
+              number on this page is a measurement of what that decision has done &mdash; and
+              a rebuttal to the story the people who wrote it want you to believe.
+              <b>Abortion is normal, safe, and moral.</b> The data agrees.
+            </p>
+            <div class="hero__counter" aria-live="polite">
+              <div class="hero__counter-label">Days since Dobbs</div>
+              <div class="hero__counter-number" data-days-since="2022-06-24">0</div>
+              <div class="hero__counter-sub">and counting</div>
+            </div>
+          </div>
+
+          <div class="stat-strip reveal-stagger" id="stat-strip"></div>
+        </div>
+      </section>
+
+      <div class="container"><div class="rule"></div></div>
+
+      <!-- ================= MAP ================= -->
+      <section class="section" id="access">
+        <div class="container">
+          <header class="section__head reveal">
+            <div>
+              <div class="section__num">§ 01 / Access</div>
+              <h2 class="section__title">Where <em>abortion</em> is legal today.</h2>
+            </div>
+            <p class="section__lede">
+              Fourteen states enforce a total ban. Another twelve enforce early or
+              mid-pregnancy restrictions. Click any state to see the law in effect, the
+              gestational limit, and how many residents travelled out of state for care
+              in 2024.
+            </p>
+          </header>
+
+          <div class="map-wrap reveal">
+            <div class="map-panel">
+              <div class="map-legend">
+                <span class="legend-dot" style="--swatch: var(--color-their);">Total ban (14)</span>
+                <span class="legend-dot" style="--swatch: var(--color-our);">Early-pregnancy ban (5)</span>
+                <span class="legend-dot" style="--swatch: var(--color-truth);">Gestational limit (8)</span>
+                <span class="legend-dot" style="--swatch: var(--color-sage);">Protected (23 + DC)</span>
+              </div>
+              <svg id="us-map" viewBox="0 0 975 610" preserveAspectRatio="xMidYMid meet" role="img" aria-label="United States abortion-law map"></svg>
+            </div>
+            <aside class="state-detail" aria-live="polite">
+              <div class="card__label">Selected state</div>
+              <div class="state-detail__name" data-state-name>Texas</div>
+              <div class="state-detail__status status-banned" data-state-status>Total ban</div>
+              <p class="state-detail__law" data-state-law>
+                Total ban plus SB8 civil bounty. 28,000+ Texans travelled out of state in 2024.
+              </p>
+              <div class="state-detail__meta">
+                <div>Gestational limit<strong data-state-gest>0 weeks</strong></div>
+                <div>Travelled 2024<strong data-state-trav>28,000</strong></div>
+              </div>
+            </aside>
+          </div>
+        </div>
+      </section>
+
+      <div class="container"><div class="rule"></div></div>
+
+      <!-- ================= MATERNAL MORTALITY ================= -->
+      <section class="section" id="mortality">
+        <div class="container">
+          <header class="section__head reveal">
+            <div>
+              <div class="section__num">§ 02 / Mortality</div>
+              <h2 class="section__title">The <em>cost</em> is measured in lives.</h2>
+            </div>
+            <p class="section__lede">
+              Maternal mortality per 100,000 live births in 2023. In the states that
+              banned abortion after <em>Dobbs</em>, mothers are dying at a rate 45%
+              higher than in states that protected access. For Black mothers in ban
+              states, the rate is more than triple that of their neighbours.
+            </p>
+          </header>
+
+          <div class="mortality reveal">
+            <div class="mortality-chart-wrap">
+              <div class="mortality-chart-head">
+                <h3>Deaths per 100,000 live births</h3>
+                <div class="mortality-chart-sub">United States, 2023 &middot; GEPI analysis of CDC mortality files</div>
+              </div>
+              <div class="mortality-chart" id="mortality-chart"></div>
+              <div class="mortality-chart-footer">
+                <span><span class="swatch" style="--swatch: var(--color-their);"></span> Ban states</span>
+                <span><span class="swatch" style="--swatch: var(--color-sage);"></span> Supportive states</span>
+                <a class="mortality-src" href="https://thegepi.org/maternal-mortality-abortion-bans/" target="_blank" rel="noopener">Source &middot; GEPI</a>
+              </div>
+            </div>
+
+            <aside class="mortality-copy">
+              <div class="mortality-stat">
+                <div class="mortality-stat__value">+45%</div>
+                <div class="mortality-stat__label">higher maternal mortality in ban states vs. supportive states</div>
+              </div>
+              <div class="mortality-stat mortality-stat--win">
+                <div class="mortality-stat__value">&minus;21%</div>
+                <div class="mortality-stat__label">mortality in protected states since Dobbs</div>
+              </div>
+              <div class="mortality-stat mortality-stat--note">
+                <div class="mortality-stat__value">3.3&times;</div>
+                <div class="mortality-stat__label">Black maternal mortality vs. White in ban states (up from 2.2&times; pre-Dobbs)</div>
+              </div>
+              <p class="mortality-note">
+                Every predicted consequence is documented: delayed care, sepsis, hemorrhage, provider flight, and widening racial disparities.
+              </p>
+            </aside>
+          </div>
+        </div>
+      </section>
+
+      <div class="container"><div class="rule"></div></div>
+
+      <!-- ================= TRAVEL ================= -->
+      <section class="section" id="travel">
+        <div class="container">
+          <header class="section__head reveal">
+            <div>
+              <div class="section__num">§ 03 / Travel</div>
+              <h2 class="section__title">The <em>geography</em> of access.</h2>
+            </div>
+            <p class="section__lede">
+              Before <em>Dobbs</em>, 81,000 people crossed state lines for abortion in
+              a year. In 2024, <b>155,000 did</b> — 15% of all U.S. abortion patients.
+              Here are the top receiving states, and the share of their total volume
+              that comes from non-residents.
+            </p>
+          </header>
+
+          <div class="travel reveal-stagger" id="travel-stats"></div>
+
+          <div class="travel-chart-wrap reveal">
+            <h3>States receiving the most patients, 2024</h3>
+            <div class="travel-chart" id="travel-chart"></div>
+            <p class="card__source" style="border:0; padding:var(--space-4) 0 0;">
+              Source · <a href="https://www.guttmacher.org/news-release/2025/guttmacher-institute-releases-full-year-us-abortion-data-2024" target="_blank" rel="noopener">Guttmacher Institute, Monthly Abortion Provision Study</a>
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <div class="container"><div class="rule"></div></div>
+
+      <!-- ================= LIES VS TRUTHS ================= -->
+      <section class="section" id="lies">
+        <div class="container">
+          <header class="section__head reveal">
+            <div>
+              <div class="section__num">§ 04 / Rebuttal</div>
+              <h2 class="section__title">Every <span class="their">lie</span>, the <span class="truth">truth</span> next to it.</h2>
+            </div>
+            <p class="section__lede">
+              Disinformation is the infrastructure of the anti-abortion movement. Each
+              claim on the left is one you have heard. Each answer on the right is the
+              sourced medical or legal record.
+            </p>
+          </header>
+
+          <div class="lies reveal-stagger" id="lies-grid"></div>
+        </div>
+      </section>
+
+      <div class="container"><div class="rule"></div></div>
+
+      <!-- ================= LEGISLATION PULSE ================= -->
+      <section class="section" id="pulse">
+        <div class="container">
+          <header class="section__head reveal">
+            <div>
+              <div class="section__num">§ 05 / Pulse</div>
+              <h2 class="section__title">This <em>week</em> in the war on bodies.</h2>
+            </div>
+            <p class="section__lede">
+              A snapshot of recent bills, rulings, and ballot outcomes. Red is a loss;
+              sage is a win. Nothing here is hypothetical — every line is a draft bill
+              or a court decision filed in the last thirty days.
+            </p>
+          </header>
+          <div class="feed reveal" id="legislation-feed" role="feed" aria-label="Legislation activity"></div>
+        </div>
+      </section>
+
+      <div class="container"><div class="rule"></div></div>
+
+      <!-- ================= STORIES ================= -->
+      <section class="section" id="stories">
+        <div class="container">
+          <div class="stories reveal" aria-label="Patient stories carousel">
+            <div class="stories__eyebrow">§ 06 / In their own words</div>
+            <blockquote class="stories__quote" data-story-quote>&ldquo;&rdquo;</blockquote>
+            <div class="stories__attribution" data-story-meta></div>
+            <div class="stories__dots" role="tablist" aria-label="Select story">
+              <button class="stories__dot" data-story-dot aria-label="Story 1"></button>
+              <button class="stories__dot" data-story-dot aria-label="Story 2"></button>
+              <button class="stories__dot" data-story-dot aria-label="Story 3"></button>
+              <button class="stories__dot" data-story-dot aria-label="Story 4"></button>
+              <button class="stories__dot" data-story-dot aria-label="Story 5"></button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- ================= FOOTER ================= -->
+    <footer class="site-footer">
+      <div class="container site-footer__inner">
+        <div class="site-footer__credit">
+          Designed by <b>Cody Heart</b> with <a href="https://www.perplexity.ai" target="_blank" rel="noopener">Perplexity</a> and Claude,
+          inspired by Jessica Valenti's <a href="https://www.jessicavalenti.com/abortion-book" target="_blank" rel="noopener">Abortion: Our Bodies, Their Lies, and the Truths We Use to Win</a>
+          and her newsletter <a href="https://jessica.substack.com" target="_blank" rel="noopener">Abortion, Every Day</a>.
+          <br />
+          Personal site — <a href="https://codynheart.com" target="_blank" rel="noopener">codynheart.com</a>.
+          Data from Guttmacher Institute, Society of Family Planning's #WeCount, KFF, and the Gender Equity Policy Institute.
+        </div>
+        <div>
+          <div class="site-footer__brand"><em>post</em>roe.org</div>
+          <div class="site-footer__meta">Arming the choir · Updated 2026</div>
+        </div>
+      </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/topojson-client@3/dist/topojson-client.min.js"></script>
+    <script src="js/data.js"></script>
+    <script src="js/states.js"></script>
+    <script>
+      // ---- render stat strip ----
+      (function () {
+        const host = document.getElementById('stat-strip');
+        if (!host || !window.POSTROE_DATA) return;
+        host.innerHTML = window.POSTROE_DATA.stats
+          .map(
+            (s) => `
+          <div class="card">
+            <div class="card__label">${s.label}</div>
+            <div class="card__stat" data-count="${s.value}" data-format="${s.format || 'plain'}" data-duration="1600">0</div>
+            <div class="card__desc">${s.desc}</div>
+            <div class="card__source">Source · <a href="${s.source.url}" target="_blank" rel="noopener">${s.source.name}</a></div>
+          </div>`
+          )
+          .join('');
+      })();
+
+      // ---- render mortality bars ----
+      (function () {
+        const host = document.getElementById('mortality-chart');
+        if (!host || !window.POSTROE_DATA) return;
+        const max = Math.max(...window.POSTROE_DATA.mortality.map((m) => m.value));
+        host.innerHTML = window.POSTROE_DATA.mortality
+          .map(
+            (m) => `
+          <div class="bar-row">
+            <div class="bar-row__label">${m.group}<small>${m.note}</small></div>
+            <div class="bar-track">
+              <div class="bar-fill" data-width="${(m.value / max) * 100}%" style="--bar-color: var(--color-${m.color});"></div>
+            </div>
+            <div class="bar-row__value">${m.value}</div>
+          </div>`
+          )
+          .join('');
+      })();
+
+      // ---- travel stats + chart ----
+      (function () {
+        const hostStats = document.getElementById('travel-stats');
+        const hostChart = document.getElementById('travel-chart');
+        if (!hostStats || !hostChart || !window.POSTROE_DATA) return;
+
+        hostStats.innerHTML = window.POSTROE_DATA.travelStats
+          .map(
+            (s) => `
+          <div class="card">
+            <div class="card__label">${s.label}</div>
+            <div class="card__stat" ${typeof s.value === 'number' ? `data-count="${s.value}" data-format="number"` : ''} style="color: var(--color-${s.color});">${typeof s.value === 'number' ? '0' : s.value}</div>
+          </div>`
+          )
+          .join('');
+
+        const max = Math.max(...window.POSTROE_DATA.travel.map((t) => t.patients));
+        hostChart.innerHTML = window.POSTROE_DATA.travel
+          .map(
+            (t) => `
+          <div class="travel-row">
+            <div class="travel-row__label">${t.from}<br><small style="color:var(--color-text-faint);font-weight:400;font-size:var(--text-xs);">${t.share}</small></div>
+            <div class="travel-track">
+              <div class="travel-fill" data-width="${(t.patients / max) * 100}%"></div>
+            </div>
+            <div class="travel-row__value">${t.patients.toLocaleString()}</div>
+          </div>`
+          )
+          .join('');
+      })();
+
+      // ---- lies grid ----
+      (function () {
+        const host = document.getElementById('lies-grid');
+        if (!host || !window.POSTROE_DATA) return;
+        host.innerHTML = window.POSTROE_DATA.lies
+          .map(
+            (l) => `
+          <article class="lie-card">
+            <div class="lie-card__section">
+              <div class="lie-card__tag their">Their Lie</div>
+              <p class="lie-card__text">&ldquo;${l.lie}&rdquo;</p>
+            </div>
+            <div class="lie-card__section">
+              <div class="lie-card__tag we">The Truth</div>
+              <p class="lie-card__fact">${l.truth}</p>
+              <div class="card__source" style="margin-top:var(--space-3);">Source · <a href="${l.source.url}" target="_blank" rel="noopener">${l.source.name}</a></div>
+            </div>
+          </article>`
+          )
+          .join('');
+      })();
+
+      // ---- legislation feed ----
+      (function () {
+        const host = document.getElementById('legislation-feed');
+        if (!host || !window.POSTROE_DATA) return;
+        const labels = { high: 'Threat', med: 'Watch', low: 'Process', win: 'Win' };
+        host.innerHTML = window.POSTROE_DATA.legislation
+          .map(
+            (l) => `
+          <article class="feed-item" role="article">
+            <div class="feed-date">${l.date}</div>
+            <div class="feed-body">
+              <strong>${l.title}</strong>
+              <small>${l.body}</small>
+            </div>
+            <span class="threat-pill threat-${l.threat}">${labels[l.threat]}</span>
+          </article>`
+          )
+          .join('');
+      })();
+    </script>
+    <script src="js/us-atlas.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/map.js"></script>
+  </body>
+</html>
