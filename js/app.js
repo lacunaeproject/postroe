@@ -109,19 +109,6 @@ function formatNum(v, fmt, end) {
   return Math.round(v).toLocaleString();
 }
 
-// ---------- Days since Dobbs ----------
-(function daysCounter() {
-  const el = document.querySelector('[data-days-since]');
-  if (!el) return;
-  const start = new Date(el.dataset.daysSince);
-  const now = new Date();
-  const days = Math.floor((now - start) / (1000 * 60 * 60 * 24));
-  el.dataset.count = days;
-  el.dataset.format = 'number';
-  // start immediately since it's in the hero and already visible
-  startCounter(el);
-})();
-
 // ---------- State detail panel (driven by map.js) ----------
 window.updateStateDetail = function updateStateDetail(code) {
   const data = window.POSTROE_STATES[code];
