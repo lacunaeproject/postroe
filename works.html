@@ -26,8 +26,10 @@
           <span><strong>post</strong><em>roe</em>.org</span>
         </a>
         <nav class="nav" aria-label="Primary">
-          <a href="index.html">Dashboard</a>
-          <a href="works.html" aria-current="page">Books</a>
+          <div class="nav__tabs">
+            <a href="index.html">Dashboard</a>
+            <a href="works.html" aria-current="page">Books</a>
+          </div>
           <button class="theme-toggle" data-theme-toggle aria-label="Toggle theme"></button>
         </nav>
       </div>
@@ -48,13 +50,21 @@
             </p>
           </div>
 
-          <div class="works-filter reveal" role="tablist" aria-label="Filter works">
-            <button class="chip is-active" data-filter="all">All</button>
-            <button class="chip" data-filter="Frontline">Frontline</button>
-            <button class="chip" data-filter="Contemporary">Contemporary</button>
-            <button class="chip" data-filter="Reproductive Justice">Reproductive Justice</button>
-            <button class="chip" data-filter="Canon">Canon</button>
-            <button class="chip" data-filter="Fiction & Memoir">Fiction & Memoir</button>
+          <div class="works-toolbar reveal">
+            <button class="filter-trigger" type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="works-filter">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16M7 12h10M10 18h4"/></svg>
+              Filter <span data-filter-label>All</span>
+            </button>
+            <div class="sheet-backdrop" data-sheet-close></div>
+            <div class="works-filter" id="works-filter" role="group" aria-label="Filter works">
+              <div class="sheet__head"><span class="sheet__grip" aria-hidden="true"></span><h2>Filter books</h2></div>
+              <button class="chip is-active" data-filter="all">All</button>
+              <button class="chip" data-filter="Frontline">Frontline</button>
+              <button class="chip" data-filter="Contemporary">Contemporary</button>
+              <button class="chip" data-filter="Reproductive Justice">Reproductive Justice</button>
+              <button class="chip" data-filter="Canon">Canon</button>
+              <button class="chip" data-filter="Fiction & Memoir">Fiction & Memoir</button>
+            </div>
           </div>
 
           <div class="works-grid reveal-stagger" id="works-grid"></div>

@@ -29,6 +29,17 @@
   }
 })();
 
+const prefersReducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+// ---------- Header: hairline + shadow once the page scrolls ----------
+(function headerScroll() {
+  const header = document.querySelector('.site-header');
+  if (!header) return;
+  const update = () => header.classList.toggle('is-scrolled', window.scrollY > 4);
+  update();
+  window.addEventListener('scroll', update, { passive: true });
+})();
+
 // ---------- Reveal on scroll ----------
 (function revealOnScroll() {
   const els = document.querySelectorAll('.reveal, .reveal-stagger, .rule');
@@ -49,11 +60,15 @@
           entry.target.querySelectorAll('.travel-fill').forEach((b) => {
             b.style.width = b.dataset.width;
           });
+          // drop the stagger delays once the entrance is done so hover feels instant
+          if (entry.target.classList.contains('reveal-stagger')) {
+            setTimeout(() => entry.target.classList.add('is-settled'), 1300);
+          }
           io.unobserve(entry.target);
         }
       });
     },
-    { threshold: 0.15, rootMargin: '-40px 0px' }
+    { threshold: 0, rootMargin: '0px 0px -8% 0px' }
   );
   els.forEach((el) => io.observe(el));
 })();
@@ -65,6 +80,10 @@ function startCounter(el) {
   const end = parseFloat(el.dataset.count);
   const duration = parseInt(el.dataset.duration || '1800', 10);
   const format = el.dataset.format || 'plain';
+  if (prefersReducedMotion) {
+    el.textContent = formatNum(end, format, end);
+    return;
+  }
   const start = performance.now();
 
   function tick(now) {
@@ -177,6 +196,9 @@ window.updateStateDetail = function updateStateDetail(code) {
     });
   });
 
+  // no auto-advance for people who asked for less motion
+  if (prefersReducedMotion) return;
+
   let interval = setInterval(() => {
     i = (i + 1) % items.length;
     render(i);
@@ -200,10 +222,47 @@ window.updateStateDetail = function updateStateDetail(code) {
   const cards = document.querySelectorAll('[data-cat]');
   if (!chips.length || !cards.length) return;
 
+  const sheet = document.getElementById('works-filter');
+  const trigger = document.querySelector('.filter-trigger');
+  const backdrop = document.querySelector('[data-sheet-close]');
+  const label = document.querySelector('[data-filter-label]');
+  const isPhone = matchMedia('(max-width: 640px)');
+
+  function setSheet(open) {
+    if (!sheet || !trigger) return;
+    sheet.classList.toggle('is-open', open);
+    backdrop && backdrop.classList.toggle('is-open', open);
+    document.body.classList.toggle('sheet-open', open);
+    trigger.setAttribute('aria-expanded', String(open));
+    if (open) {
+      sheet.setAttribute('role', 'dialog');
+      sheet.setAttribute('aria-modal', 'true');
+      (sheet.querySelector('.chip.is-active') || chips[0]).focus({ preventScroll: true });
+    } else {
+      sheet.setAttribute('role', 'group');
+      sheet.removeAttribute('aria-modal');
+    }
+  }
+
+  if (trigger) trigger.addEventListener('click', () => setSheet(true));
+  if (backdrop) backdrop.addEventListener('click', () => setSheet(false));
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && sheet && sheet.classList.contains('is-open')) {
+      setSheet(false);
+      trigger.focus();
+    }
+  });
+  isPhone.addEventListener('change', () => setSheet(false));
+
   chips.forEach((chip) => {
     chip.addEventListener('click', () => {
       const cat = chip.dataset.filter;
       chips.forEach((c) => c.classList.toggle('is-active', c === chip));
+      if (label) label.textContent = chip.textContent;
+      if (sheet && sheet.classList.contains('is-open')) {
+        setSheet(false);
+        trigger.focus({ preventScroll: true });
+      }
       cards.forEach((card) => {
         const show = cat === 'all' || card.dataset.cat === cat;
         card.style.transition = 'opacity .35s, transform .35s';

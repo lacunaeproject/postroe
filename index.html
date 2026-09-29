@@ -27,8 +27,10 @@
           <span><strong>post</strong><em>roe</em>.org</span>
         </a>
         <nav class="nav" aria-label="Primary">
-          <a href="index.html" aria-current="page">Dashboard</a>
-          <a href="works.html">Books</a>
+          <div class="nav__tabs">
+            <a href="index.html" aria-current="page">Dashboard</a>
+            <a href="works.html">Books</a>
+          </div>
           <button class="theme-toggle" data-theme-toggle aria-label="Toggle theme"></button>
         </nav>
       </div>
@@ -323,7 +325,7 @@
             (s) => `
           <div class="card">
             <div class="card__label">${s.label}</div>
-            <div class="card__stat" ${typeof s.value === 'number' ? `data-count="${s.value}" data-format="number"` : ''} style="color: var(--color-${s.color});">${typeof s.value === 'number' ? '0' : s.value}</div>
+            <div class="card__stat" ${typeof s.value === 'number' ? `data-count="${s.value}" data-format="number"` : ''}>${typeof s.value === 'number' ? '0' : s.value}</div>
           </div>`
           )
           .join('');
